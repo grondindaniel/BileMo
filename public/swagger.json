@@ -9,5 +9,24 @@
             "url": "http://api-bilemo.proteiforme.fr/v1",
             "description": "BileMo API"
         }
-    ]
+    ],
+    "paths": {
+        "/login": {
+            "post": {
+                "operationId": "App\\Controller\\UserController::login",
+                "responses": {
+                    "200": {
+                        "description": "Successful authentication",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
