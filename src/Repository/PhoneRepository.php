@@ -19,6 +19,19 @@ class PhoneRepository extends ServiceEntityRepository
         parent::__construct($registry, Phone::class);
     }
 
+    /**
+     * @return Phone[] Returns an array of Smartphone objects
+     */
+    public function findlistPhones()
+    {
+        $q = "select Phone.id,Phone.name from Phone";
+
+        $stmt = $this->getEntityManager()->getConnection()->prepare($q);
+        $stmt->execute([]);
+
+        return $stmt->fetchAll();
+    }
+
     // /**
     //  * @return Phone[] Returns an array of Phone objects
     //  */

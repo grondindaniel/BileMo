@@ -11,6 +11,26 @@
         }
     ],
     "paths": {
+        "api/v1/phones": {
+            "get": {
+                "operationId": "App\\Controller\\PhoneController::getPhone",
+                "responses": {
+                    "200": {
+                        "description": "All smartphones"
+                    }
+                }
+            }
+        },
+        "api/v1/phones/{id}": {
+            "get": {
+                "operationId": "App\\Controller\\PhoneController::getPhoneDetail",
+                "responses": {
+                    "200": {
+                        "description": "Get detail about a specific smartphone"
+                    }
+                }
+            }
+        },
         "/login": {
             "post": {
                 "operationId": "App\\Controller\\UserController::login",
