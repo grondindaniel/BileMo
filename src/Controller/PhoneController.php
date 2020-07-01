@@ -27,7 +27,7 @@ class PhoneController extends AbstractController
     }
 
     /**
-     * @OA\GET(path="api/v1/phones", @OA\Response(response="200", description="All smartphones"))
+     * @OA\GET(path="/api/v1/phones", @OA\Response(response="200", description="All smartphones"))
      * @Route("/api/v1/phones", name="api_get", methods={"GET"})
      */
     public function getPhone(PhoneRepository $PhoneRepository)
@@ -36,7 +36,7 @@ class PhoneController extends AbstractController
     }
 
     /**
-     * @OA\GET(path="api/v1/phones/{id}", @OA\Response(response="200", description="Get detail about a specific smartphone"))
+     * @OA\GET(path="/api/v1/phones/{id}", @OA\Response(response="200", description="Get detail about a specific smartphone"))
      * @Route("/api/phones/{id}", name="api_get_detail", methods={"GET"})
      */
     public function getPhoneDetail(PhoneRepository $smartphoneRepository, $id)
