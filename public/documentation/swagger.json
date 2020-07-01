@@ -17,6 +17,14 @@
                     "Client"
                 ],
                 "operationId": "App\\Controller\\ClientController::register",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Client object that needs to be added in database",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "201": {
                         "description": "client created",
