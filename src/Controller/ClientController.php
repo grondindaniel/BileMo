@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Client;
 use App\Repository\ClientRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -36,11 +37,11 @@ class ClientController extends AbstractController
      * @OA\Get(path="/api/v1/clients", @OA\Response(response="200", description="All clients"))
      * @Route("/api/v1/clients", name="api_clients", methods={"GET"})
      */
-    public function getClients(ClientRepository $clientRepository, Request $request, SerializerInterface $serializer)
+    public function getClients(ClientRepository $clientRepository, Request $request, SerializerInterface $serializer, PaginatorInterface $paginator)
     {
         $user = $this->getUser();
         $id = $user->getId();
-        $clients = $clientRepository->findClientsList($id);
+        $clients = $paginator->paginate($clientRepository->findClientsList($id), $request->get('page', 1), 3);
         return $this->json($clients, 200,[],['circular_reference_limit' => 1,
             'circular_reference_handler' => function ($object) {
                 return $object->getId();

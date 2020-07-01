@@ -13,6 +13,9 @@
     "paths": {
         "/api/v1/register_client": {
             "post": {
+                "tags": [
+                    "Client"
+                ],
                 "operationId": "App\\Controller\\ClientController::register",
                 "responses": {
                     "201": {
@@ -28,18 +31,24 @@
                 }
             }
         },
-        "/api/v1/clients": {
+        "/api/v1/clients?page={int}": {
             "get": {
+                "tags": [
+                    "Client"
+                ],
                 "operationId": "App\\Controller\\ClientController::getClients",
                 "responses": {
                     "200": {
-                        "description": "All clients"
+                        "description": "All clients, 3 per page"
                     }
                 }
             }
         },
         "/api/v1/clients/{id}": {
             "get": {
+                "tags": [
+                    "Client"
+                ],
                 "operationId": "App\\Controller\\ClientController::getClientsDetails",
                 "responses": {
                     "200": {
@@ -50,6 +59,9 @@
         },
         "/api/v1/delete_clients/{id}": {
             "delete": {
+                "tags": [
+                    "Client"
+                ],
                 "operationId": "App\\Controller\\ClientController::remove",
                 "responses": {
                     "204": {
@@ -67,6 +79,9 @@
         },
         "/api/v1/phones": {
             "get": {
+                "tags": [
+                    "Phones"
+                ],
                 "operationId": "App\\Controller\\PhoneController::getPhone",
                 "responses": {
                     "200": {
@@ -77,6 +92,9 @@
         },
         "/api/v1/phones/{id}": {
             "get": {
+                "tags": [
+                    "Phones"
+                ],
                 "operationId": "App\\Controller\\PhoneController::getPhoneDetail",
                 "responses": {
                     "200": {
@@ -87,6 +105,9 @@
         },
         "/login": {
             "post": {
+                "tags": [
+                    "Login"
+                ],
                 "operationId": "App\\Controller\\UserController::login",
                 "responses": {
                     "200": {
