@@ -11,7 +11,61 @@
         }
     ],
     "paths": {
-        "api/v1/phones": {
+        "/api/v1/register_client": {
+            "post": {
+                "operationId": "App\\Controller\\ClientController::register",
+                "responses": {
+                    "201": {
+                        "description": "client created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/clients": {
+            "get": {
+                "operationId": "App\\Controller\\ClientController::getClients",
+                "responses": {
+                    "200": {
+                        "description": "All clients"
+                    }
+                }
+            }
+        },
+        "/api/v1/clients/{id}": {
+            "get": {
+                "operationId": "App\\Controller\\ClientController::getClientsDetails",
+                "responses": {
+                    "200": {
+                        "description": "All clients"
+                    }
+                }
+            }
+        },
+        "/api/v1/delete_clients/{id}": {
+            "delete": {
+                "operationId": "App\\Controller\\ClientController::remove",
+                "responses": {
+                    "204": {
+                        "description": "delete a client",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/phones": {
             "get": {
                 "operationId": "App\\Controller\\PhoneController::getPhone",
                 "responses": {
@@ -21,7 +75,7 @@
                 }
             }
         },
-        "api/v1/phones/{id}": {
+        "/api/v1/phones/{id}": {
             "get": {
                 "operationId": "App\\Controller\\PhoneController::getPhoneDetail",
                 "responses": {
