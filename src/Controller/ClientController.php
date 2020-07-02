@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use OpenApi\Annotations as OA;
+use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class ClientController extends AbstractController
@@ -21,16 +22,21 @@ class ClientController extends AbstractController
     public function register(Request $request, EntityManagerInterface $om, SerializerInterface $serializer)
     {
 
-        $client = $request->getContent();
-        $client = $serializer->deserialize($client, Client::class, 'json');
-        $user = $this->getUser();
-        $client-> setUser($user);
-        $om->persist($client);
-        $om->flush();
-        return $this->json($client, 200,[],['circular_reference_limit' => 1,
-            'circular_reference_handler' => function ($object) {
-                return $object->getId();
-            },'ignored_attributes' => ['user']]);
+        try {
+            $client = $request->getContent();
+            $client = $serializer->deserialize($client, Client::class, 'json');
+            $user = $this->getUser();
+            $client-> setUser($user);
+            $om->persist($client);
+            $om->flush();
+            return $this->json($client, 200,[],['circular_reference_limit' => 1,
+                'circular_reference_handler' => function ($object) {
+                    return $object->getId();
+                },'ignored_attributes' => ['user']]);
+        }catch (NotEncodableValueException $e)
+        {
+            return $this->json(array('status'=>400, 'message'=>$e->getMessage()),400);
+        }
     }
 
     /**

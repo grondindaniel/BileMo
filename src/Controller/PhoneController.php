@@ -37,7 +37,7 @@ class PhoneController extends AbstractController
 
     /**
      * @OA\GET(path="/api/v1/phones/{id}", @OA\Response(response="200", description="Get detail about a specific smartphone"))
-     * @Route("/api/phones/{id}", name="api_get_detail", methods={"GET"})
+     * @Route("/api/v1/phones/{id}", name="api_get_detail", methods={"GET"})
      */
     public function getPhoneDetail(PhoneRepository $smartphoneRepository, $id)
     {

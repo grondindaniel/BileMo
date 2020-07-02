@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use OpenApi\Annotations as OA;
+use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 
 class UserController extends AbstractController
 {
@@ -17,19 +18,23 @@ class UserController extends AbstractController
      */
     public function register(UserPasswordEncoderInterface $passwordEncoder, Request $request, EntityManagerInterface $om)
     {
-        $user = new User();
-        $username = $request->get("username");
-        $password = $request->get("password");
-        $encodedPassword = $passwordEncoder->encodePassword($user, $password);
-        $user-> setUsername($username);
-        $user-> setPassword ($encodedPassword);
+        try {
+            $user = new User();
+            $username = $request->get("username");
+            $password = $request->get("password");
+            $encodedPassword = $passwordEncoder->encodePassword($user, $password);
+            $user-> setUsername($username);
+            $user-> setPassword ($encodedPassword);
 
-        $om->persist($user);
-        $om->flush();
-        return $this->json([
-            'username' => $username,
-            'password' => $password
-        ]);
+            $om->persist($user);
+            $om->flush();
+            return $this->json([
+                'username' => $username,
+                'password' => $password
+            ]);
+        }catch (NotEncodableValueException $e){
+            return $this->json(array('status'=>400, 'message'=>$e->getMessage(),400));
+        }
     }
 
 

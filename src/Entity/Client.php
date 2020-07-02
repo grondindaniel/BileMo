@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ClientRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ClientRepository::class)
@@ -19,41 +20,90 @@ class Client
 
     /**
      * @ORM\Column(type="string", length=80)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 80,
+     *      minMessage = "The firstname must be at least {{ limit }} characters long",
+     *      maxMessage = "The firstname cannot be longer than {{ limit }} characters",
+     *      allowEmptyString = false
+     * )
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=80)
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 80,
+     *      minMessage = "The lastname must be at least {{ limit }} characters long",
+     *      maxMessage = "The lastname cannot be longer than {{ limit }} characters",
+     *      allowEmptyString = false
+     * )
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email."
+     * )
      */
     private $email;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\GreaterThan(
+     *     value = 0
+     * )
      */
     private $streetNumber;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 80,
+     *      minMessage = "The street name must be at least {{ limit }} characters long",
+     *      maxMessage = "The street name cannot be longer than {{ limit }} characters",
+     *      allowEmptyString = false
+     * )
      */
     private $street;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 5,
+     *      minMessage = "The postal code must be at least {{ limit }} characters long",
+     *      maxMessage = "The postal code cannot be longer than {{ limit }} characters",
+     *      allowEmptyString = false
+     * )
      */
     private $cp;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 80,
+     *      minMessage = "The city name must be at least {{ limit }} characters long",
+     *      maxMessage = "The city name cannot be longer than {{ limit }} characters",
+     *      allowEmptyString = false
+     * )
      */
     private $city;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 5,
+     *      minMessage = "The phone number must be at least {{ limit }} characters long",
+     *      maxMessage = "The phone number cannot be longer than {{ limit }} characters",
+     *      allowEmptyString = false
+     * )
      */
     private $phoneNumber;
 
