@@ -12,6 +12,6 @@ class DocumentationController extends AbstractController
      */
     public function index()
     {
-        return $this->redirect('https://127.0.0.1:8027/documentation/index.html');
+        return $this->redirect('https://127.0.0.1:8000/documentation/index.html');
     }
 }

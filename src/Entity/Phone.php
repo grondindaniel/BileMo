@@ -4,9 +4,20 @@ namespace App\Entity;
 
 use App\Repository\PhoneRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Hateoas\Configuration\Annotation as Hateoas;
+use JMS\Serializer\Annotation as Serializer;
+
 
 /**
  * @ORM\Entity(repositoryClass=PhoneRepository::class)
+ * @Hateoas\Relation(
+ *      "self",
+ *      href = @Hateoas\Route(
+ *          "api_get_detail",
+ *          parameters = { "id" = "expr(object.getId())" },
+ *          absolute = true,
+ *      )
+ * )
  */
 class Phone
 {
@@ -24,21 +35,25 @@ class Phone
 
     /**
      * @ORM\Column(type="string", length=80)
+     * @Serializer\Groups({"list"})
      */
     private $ref;
 
     /**
      * @ORM\Column(type="integer")
+     * @Serializer\Groups({"list"})
      */
     private $price;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Serializer\Groups({"list"})
      */
     private $designation;
 
     /**
      * @ORM\Column(type="integer")
+     * @Serializer\Groups({"list"})
      */
     private $stock;
 

@@ -16,8 +16,8 @@ use Symfony\Component\Serializer\SerializerInterface;
 class ClientController extends AbstractController
 {
     /**
-     * @OA\Post(path="/api/v1/register_client", @OA\Response(response="201", description="client created", @OA\JsonContent(type="string")))
-     * @Route("/api/v1/register_client", name = "api_register_client", methods = {"POST"})
+     * @OA\Post(path="/api/v1/register_clients", @OA\Response(response="201", description="client created", @OA\JsonContent(type="string")))
+     * @Route("/api/v1/register_clients", name = "api_register_client", methods = {"POST"})
      */
     public function register(Request $request, EntityManagerInterface $om, SerializerInterface $serializer)
     {
@@ -33,7 +33,8 @@ class ClientController extends AbstractController
                 'circular_reference_handler' => function ($object) {
                     return $object->getId();
                 },'ignored_attributes' => ['user']]);
-        }catch (NotEncodableValueException $e)
+        }
+        catch (NotEncodableValueException $e)
         {
             return $this->json(array('status'=>400, 'message'=>$e->getMessage()),400);
         }

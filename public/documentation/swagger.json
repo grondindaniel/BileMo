@@ -11,7 +11,7 @@
         }
     ],
     "paths": {
-        "/api/v1/register_client": {
+        "/api/v1/register_clients": {
             "post": {
                 "tags": [
                     "Client"
