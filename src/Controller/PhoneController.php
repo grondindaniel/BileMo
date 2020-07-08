@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
-//use Symfony\Component\Serializer\SerializerInterface;
 use OpenApi\Annotations as OA;
 
 
@@ -29,6 +28,10 @@ class PhoneController extends AbstractController
 
     /**
      * @Route("/api/add_phones", name="api_post", methods={"POST"})
+     * @param Request $request
+     * @param SerializerInterface $serializer
+     * @param EntityManagerInterface $manager
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function addPhone(Request $request, SerializerInterface $serializer, EntityManagerInterface $manager)
     {
@@ -48,19 +51,25 @@ class PhoneController extends AbstractController
     /**
      * @OA\GET(path="/api/v1/phones", @OA\Response(response="200", description="All smartphones"))
      * @Route("/api/v1/phones", name="api_get", methods={"GET"})
+     * @param PhoneRepository $PhoneRepository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
      */
-    public function getPhone(PhoneRepository $PhoneRepository, PaginatorInterface $paginator)
+    public function getPhone(PhoneRepository $PhoneRepository, PaginatorInterface $paginator, Request $request)
     {
         $phones =$PhoneRepository->findAll();
-        $json = $this->serializer->serialize($phones, 'json', SerializationContext::create()->setGroups(array('Default', 'items' => array('list'))));
-
-        return new Response($json, 200, array('Content-Type' => 'application/json'));
-
+        $phones = $paginator->paginate($phones, $request->get('page', 1), 3);
+        $json = $this->serializer->serialize($phones, 'json', SerializationContext::create()->setGroups(array('Default', 'terms' => array('listPhones'))));
+        return new Response($json, 200, array('Content-Type' => 'application/json'), $phones);
     }
 
     /**
      * @OA\GET(path="/api/v1/phones/{id}", @OA\Response(response="200", description="Get detail about a specific smartphone"))
      * @Route("/api/v1/phones/{id}", name="api_get_detail", methods={"GET"})
+     * @param PhoneRepository $smartphoneRepository
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function getPhoneDetail(PhoneRepository $smartphoneRepository, $id)
     {

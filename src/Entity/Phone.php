@@ -35,25 +35,25 @@ class Phone
 
     /**
      * @ORM\Column(type="string", length=80)
-     * @Serializer\Groups({"list"})
+     * @Serializer\Groups({"listPhones"})
      */
     private $ref;
 
     /**
      * @ORM\Column(type="integer")
-     * @Serializer\Groups({"list"})
+     * @Serializer\Groups({"listPhones"})
      */
     private $price;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Serializer\Groups({"list"})
+     * @Serializer\Groups({"listPhones"})
      */
     private $designation;
 
     /**
      * @ORM\Column(type="integer")
-     * @Serializer\Groups({"list"})
+     * @Serializer\Groups({"listPhones"})
      */
     private $stock;
 

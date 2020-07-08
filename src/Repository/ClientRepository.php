@@ -24,7 +24,7 @@ class ClientRepository extends ServiceEntityRepository
      */
     public function findClientsList($id)
     {
-        $q = "select Client.id, Client.firstname, Client.lastname from Client where user_id = $id";
+        $q = "select * from Client where user_id = $id";
 
         $stmt = $this->getEntityManager()->getConnection()->prepare($q);
         $stmt->execute([]);

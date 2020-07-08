@@ -5,10 +5,21 @@ namespace App\Entity;
 use App\Repository\ClientRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Hateoas\Configuration\Annotation as Hateoas;
+use JMS\Serializer\Annotation as Serializer;
+
 
 
 /**
  * @ORM\Entity(repositoryClass=ClientRepository::class)
+ * @Hateoas\Relation(
+ *      "self",
+ *      href = @Hateoas\Route(
+ *          "api_clients_id",
+ *          parameters = { "id" = "expr(object.getId())" },
+ *          absolute = true,
+ *      )
+ * )
  */
 class Client
 {
@@ -21,6 +32,7 @@ class Client
 
     /**
      * @ORM\Column(type="string", length=80)
+     * @Serializer\Groups({"listClients"})
      * @Assert\NotBlank
      * @Assert\Length(
      *      min = 2,
@@ -53,6 +65,7 @@ class Client
     private $email;
 
     /**
+     * @Serializer\Groups({"listClients"})
      * @ORM\Column(type="integer")
      * @Assert\GreaterThan(
      *     value = 0
@@ -61,6 +74,7 @@ class Client
     private $streetNumber;
 
     /**
+     * @Serializer\Groups({"listClients"})
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(
      *      min = 2,
@@ -73,6 +87,7 @@ class Client
     private $street;
 
     /**
+     * @Serializer\Groups({"listClients"})
      * @ORM\Column(type="integer")
      * @Assert\Length(
      *      min = 3,
@@ -85,6 +100,7 @@ class Client
     private $cp;
 
     /**
+     * @Serializer\Groups({"listClients"})
      * @ORM\Column(type="string", length=100)
      * @Assert\Length(
      *      min = 2,
@@ -97,6 +113,7 @@ class Client
     private $city;
 
     /**
+     * @Serializer\Groups({"listClients"})
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\Length(
      *      min = 3,
@@ -109,6 +126,7 @@ class Client
     private $phoneNumber;
 
     /**
+     * @Serializer\Groups({"listClients"})
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="clients")
      */
     private $user;
