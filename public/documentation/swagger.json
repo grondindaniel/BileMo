@@ -6,7 +6,7 @@
     },
     "servers": [
         {
-            "url": "http://api-bilemo.proteiforme.fr/v1",
+            "url": "https://127.0.0.1:8000/api/v1",
             "description": "BileMo API"
         }
     ],
@@ -85,7 +85,7 @@
                 }
             }
         },
-        "/api/v1/phones": {
+        "/api/v1/phones?page={int}": {
             "get": {
                 "tags": [
                     "Phones"
