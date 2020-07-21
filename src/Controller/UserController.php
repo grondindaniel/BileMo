@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use JMS\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,26 +15,19 @@ use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 class UserController extends AbstractController
 {
     /**
-     * @Route ("/register", name = "api_register", methods = {"POST"})
+     * @Route ("/api/register", name = "api_register", methods = {"POST"})
      */
-    public function register(UserPasswordEncoderInterface $passwordEncoder, Request $request, EntityManagerInterface $om)
+    public function register(UserPasswordEncoderInterface $passwordEncoder, Request $request, EntityManagerInterface $om, SerializerInterface $serializer)
     {
         try {
-            $user = new User();
-            $username = $request->get("username");
-            $password = $request->get("password");
-            $encodedPassword = $passwordEncoder->encodePassword($user, $password);
-            $user-> setUsername($username);
-            $user-> setPassword ($encodedPassword);
-
-            $om->persist($user);
+            $client = $request->getContent();
+            $client = $serializer->deserialize($client, User::class, 'json');
+            $om->persist($client);
             $om->flush();
-            return $this->json([
-                'username' => $username,
-                'password' => $password
-            ]);
-        }catch (NotEncodableValueException $e){
-            return $this->json(array('status'=>400, 'message'=>$e->getMessage(),400));
+            return $this->json(['result' => 'User register with success']);
+        }catch (NotEncodableValueException $e)
+        {
+            return $this->json(array('status'=>400, 'message'=>$e->getMessage()),400);
         }
     }
 
