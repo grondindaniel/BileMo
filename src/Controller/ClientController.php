@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use OpenApi\Annotations as OA;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 
 
 class ClientController extends AbstractController
@@ -76,17 +78,23 @@ class ClientController extends AbstractController
      * @param Request $request
      * @param SerializerInterface $serializer
      * @param $id
+     * @param CacheInterface $cache
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function getClientsDetails(ClientRepository $clientRepository, Request $request, SerializerInterface $serializer, $id)
+    public function getClientsDetails(ClientRepository $clientRepository, Request $request, SerializerInterface $serializer, $id, CacheInterface $cache)
     {
         $user = $this->getUser();
         $user_id = $user->getId();
         $clients = $clientRepository->findBy(array('id'=>$id, 'user'=>$user_id));
-        return $this->json($clients, 200,[],['circular_reference_limit' => 1,
-            'circular_reference_handler' => function ($object) {
-                return $object->getId();
-            },'ignored_attributes' => ['user']]);
+        $result = $cache->get('resultat', function (ItemInterface $item) use ($clients){
+            $item->expiresAfter(5);
+            return $this->json($clients, 200,[],['circular_reference_limit' => 1,
+                'circular_reference_handler' => function ($object) {
+                    return $object->getId();
+                },'ignored_attributes' => ['user']]);
+        });
+        return $result;
+
     }
 
     /**

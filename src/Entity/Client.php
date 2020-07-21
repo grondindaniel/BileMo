@@ -114,7 +114,7 @@ class Client
 
     /**
      * @Serializer\Groups({"listClients"})
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      * @Assert\Length(
      *      min = 3,
      *      max = 5,
@@ -220,7 +220,7 @@ class Client
         return $this;
     }
 
-    public function getPhoneNumber(): ?int
+    public function getPhoneNumber(): ?string
     {
         return $this->phoneNumber;
     }
