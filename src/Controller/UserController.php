@@ -16,6 +16,11 @@ class UserController extends AbstractController
 {
     /**
      * @Route ("/api/register", name = "api_register", methods = {"POST"})
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param Request $request
+     * @param EntityManagerInterface $om
+     * @param SerializerInterface $serializer
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function register(UserPasswordEncoderInterface $passwordEncoder, Request $request, EntityManagerInterface $om, SerializerInterface $serializer)
     {
