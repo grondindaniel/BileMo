@@ -117,7 +117,7 @@ class Client
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Length(
      *      min = 3,
-     *      max = 5,
+     *      max = 10,
      *      minMessage = "The phone number must be at least {{ limit }} characters long",
      *      maxMessage = "The phone number cannot be longer than {{ limit }} characters",
      *      allowEmptyString = false
