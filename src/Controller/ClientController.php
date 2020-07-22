@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use OpenApi\Annotations as OA;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 
@@ -36,7 +37,7 @@ class ClientController extends AbstractController
      * @param SerializerInterface $serializer
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function register(Request $request, EntityManagerInterface $om, SerializerInterface $serializer)
+    public function register(Request $request, EntityManagerInterface $om, SerializerInterface $serializer, ValidatorInterface $validator)
     {
 
         try {
@@ -44,6 +45,13 @@ class ClientController extends AbstractController
             $client = $serializer->deserialize($client, Client::class, 'json');
             $user = $this->getUser();
             $client-> setUser($user);
+
+            $error = $validator->validate($client);
+
+            if(count($error)>0){
+                return $this->json($error, 400);
+            }
+
             $om->persist($client);
             $om->flush();
             return $this->json($client, 200,[],['circular_reference_limit' => 1,
