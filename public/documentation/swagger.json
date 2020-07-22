@@ -6,7 +6,7 @@
     },
     "servers": [
         {
-            "url": "https://127.0.0.0:8000/api/v1",
+            "url": "https://127.0.0.1:8000/api/v1",
             "description": "BileMo API"
         }
     ],
@@ -22,8 +22,10 @@
                         "in": "body",
                         "name": "body",
                         "description": "Client object that needs to be added in database",
+                        "example": {"firstname": "Daniel", "lastname": "Grondin", "email": "mailclient@gmail.com", "street_number": 26, "street": "barriere de saumur", "cp": 85200, "city": "Fontenay", "phone_number": "0606060606" },
                         "required": true
                     }
+
                 ],
                 "responses": {
                     "201": {
