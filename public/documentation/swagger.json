@@ -118,6 +118,16 @@
                 "tags": [
                     "Login"
                 ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "How to access BileMo Api",
+                        "example": {"username": "myusername", "password": "mypassword" },
+                        "required": true
+                    }
+
+                ],
                 "operationId": "App\\Controller\\UserController::login",
                 "responses": {
                     "200": {
