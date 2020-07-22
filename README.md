@@ -44,3 +44,11 @@ symfony console server:start -d
 see the doc
 
 https://127.0.0.1:8000/documentation/
+
+Then to use the api :
+
+{"username": "phone_market", "password": "xkeyscore"}
+
+It will generate a token ( it will expire in 1 hour) and paste in Authorization :  Token.
+
+Enjoy
