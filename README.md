@@ -8,6 +8,7 @@ How to install the API ?
 First :
 git clone https://github.com/grondindaniel/BileMo.git
 
+Next : cd BileMo
 
 Next :
 composer install
