@@ -43,6 +43,11 @@ class UserController extends AbstractController
      */
     public function login()
     {
-        return $this->json(['result' => 'ok']);
+        try {
+            return $this->json(['result' => 'ok']);
+        }
+        catch (NotEncodableValueException $e){
+            return $this->json(array("status"=>400,'message'=>$e->getMessage()));
+        }
     }
 }
