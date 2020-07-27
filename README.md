@@ -1,9 +1,11 @@
 # BileMo
 BileMo API
 
+## Pré-requis
+
 Build with Symfony 5, PHP 7.4.6
 
-How to install the API ?
+## How to install the API ?
 
 First :
 
@@ -25,7 +27,7 @@ Next in your terminal :
 
 php bin/console doctrine:database:import bilemo.sql
 
-For the token : 
+## For the token : 
 
 mkdir -p config/jwt
 
