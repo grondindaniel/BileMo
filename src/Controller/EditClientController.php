@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class EditClientController extends AbstractController
 {
     /**
-     * @Route("/api/v1/edit/{id}", name = "api_edit_client", methods = {"PUT"})
+     * @Route("/api/v1/edit_clients/{id}", name = "api_edit_client", methods = {"PUT"})
      * @param Request $request
      * @param EntityManagerInterface $om
      * @param SerializerInterface $serializer

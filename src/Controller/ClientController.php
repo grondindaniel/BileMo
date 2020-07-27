@@ -19,8 +19,8 @@ class ClientController extends AbstractController
 
 
     /**
-     * @OA\Post(path="/api/v1/add_clients", @OA\Response(response="201", description="client created", @OA\JsonContent(type="string")))
-     * @Route("/api/v1/add_clients", name = "api_register_client", methods = {"POST"})
+     * @OA\Post(path="/api/v1/clients", @OA\Response(response="201", description="client created", @OA\JsonContent(type="string")))
+     * @Route("/api/v1/clients", name = "api_register_client", methods = {"POST"})
      * @param Request $request
      * @param EntityManagerInterface $om
      * @param SerializerInterface $serializer

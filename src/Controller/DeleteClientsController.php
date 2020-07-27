@@ -11,8 +11,8 @@ use OpenApi\Annotations as OA;
 class DeleteClientsController extends AbstractController
 {
     /**
-     * @OA\Delete(path="/api/v1/delete_clients/{id}", @OA\Response(response="204", description="delete a client", @OA\JsonContent(type="string")))
-     * @Route("/api/v1/delete_clients/{id}", name="api_delete_clients_id", methods = {"DELETE"})
+     * @OA\Delete(path="/api/v1/clients/{id}", @OA\Response(response="204", description="delete a client", @OA\JsonContent(type="string")))
+     * @Route("/api/v1/clients/{id}", name="api_delete_clients_id", methods = {"DELETE"})
      * @param EntityManagerInterface $manager
      * @param Client $client
      * @return \Symfony\Component\HttpFoundation\JsonResponse

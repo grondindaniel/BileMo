@@ -22,7 +22,7 @@ class GetClientsController extends AbstractController
         $this->serializer = $serializer;
     }
     /**
-     * @OA\Get(path="/api/v1/clients", @OA\Response(response="200", description="All clients"))
+     * @OA\Get(path="/api/v1clients", @OA\Response(response="200", description="All clients"))
      * @Route("/api/v1/clients", name="api_clients", methods={"GET"})
      */
     public function getClients(ClientRepository $clientRepository, Request $request, PaginatorInterface $paginator)

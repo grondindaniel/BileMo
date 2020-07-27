@@ -11,11 +11,12 @@
         }
     ],
     "paths": {
-        "/api/v1/add_clients": {
+        "/api/v1/clients ": {
             "post": {
                 "tags": [
                     "Client"
                 ],
+                "summary": "Add new client",
                 "operationId": "App\\Controller\\ClientController::register",
                 "parameters": [
                     {
@@ -41,11 +42,12 @@
                 }
             }
         },
-        "/api/v1/clients?page={int}": {
+        "/api/v1/clients": {
             "get": {
                 "tags": [
                     "Client"
                 ],
+                "summary": "Get list of clients",
                 "operationId": "App\\Controller\\ClientController::getClients",
                 "responses": {
                     "200": {
@@ -59,6 +61,7 @@
                 "tags": [
                     "Client"
                 ],
+                "summary": "Get client details",
                 "operationId": "App\\Controller\\ClientController::getClientsDetails",
                 "responses": {
                     "200": {
@@ -67,11 +70,12 @@
                 }
             }
         },
-        "/api/v1/delete_clients/{id}": {
+        "/api/v1/clients/{id}  ": {
             "delete": {
                 "tags": [
                     "Client"
                 ],
+                "summary": "Delete a client",
                 "operationId": "App\\Controller\\ClientController::remove",
                 "responses": {
                     "204": {
@@ -87,11 +91,12 @@
                 }
             }
         },
-        "/api/v1/phones?page={int}": {
+        "/api/v1/phones": {
             "get": {
                 "tags": [
                     "Phones"
                 ],
+                "summary": "Get list of phones",
                 "operationId": "App\\Controller\\PhoneController::getPhone",
                 "responses": {
                     "200": {
@@ -105,6 +110,7 @@
                 "tags": [
                     "Phones"
                 ],
+                "summary": "Get phone details",
                 "operationId": "App\\Controller\\PhoneController::getPhoneDetail",
                 "responses": {
                     "200": {
